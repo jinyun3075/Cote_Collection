@@ -8,7 +8,6 @@ public class Main {
             Scanner sc = new Scanner(System.in);
             StringBuilder sb = new StringBuilder();
 
-
         }
         static class player{
             private String name;
