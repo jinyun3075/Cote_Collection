@@ -5,8 +5,10 @@ import java.util.*;
 
 public class Main {
         public static void main(String[] args) throws IOException {
-            Scanner sc = new Scanner(System.in);
-            StringBuilder sb = new StringBuilder();
+            ArrayList<Integer> arr = new ArrayList<>();
+            int[] a = new int[3];
+            Arrays.fill(a,2);
+            arr.forEach(i->System.out.println(i));
 
         }
         static class player{
