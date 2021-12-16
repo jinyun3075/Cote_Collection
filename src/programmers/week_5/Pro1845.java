@@ -6,10 +6,11 @@ import java.util.HashSet;
 
 public class Pro1845 {
     public static void main(String[] args) {
-        HashSet<Integer> tree = new HashSet<>();
+        int[] a = {3,4,1,2};
+        System.out.println(solution(a));
     }
 
-    public int solution(int[] nums) {
+    public static int solution(int[] nums) {
         // 옛날에 풀었던것
         // ArrayList<Integer> arr =new ArrayList<>();
         // arr.add(nums[0]);
