@@ -3,13 +3,10 @@ import java.util.Stack;
 
 public class Pro68935 {
     public static void main(String[] args) {
-        Solution s = new Solution();
         int i = 45;
-        s.solution(i);
+        System.out.print(solution(i));
     }
-}
-class Solution {
-    public int solution(int n) {
+    public static int solution(int n) {
         int answer = 0;
         Stack<Integer> st = new Stack<>();
         while (n > 0) {
