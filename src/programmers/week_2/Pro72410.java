@@ -1,8 +1,9 @@
 package programmers.week_2;
 
 public class Pro72410 {
-    public static void main(String[] args){
-        System.out.println(solution("vda..as-s_a$3#qnull"));
+    public static void main(String[] args) {
+        String new_id ="...!@BaT#*..y.abcdefghijklm";
+        System.out.println(solution(new_id));
     }
     public static String solution(String new_id) {
         String taget = new_id;
@@ -21,7 +22,5 @@ public class Pro72410 {
             taget+=taget.charAt(taget.length()-1);
         }
         return taget;
-
     }
-
 }

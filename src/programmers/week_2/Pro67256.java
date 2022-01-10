@@ -1,9 +1,10 @@
 package programmers.week_2;
 
 public class Pro67256 {
-    public static void main(String[] args) {
-        int[] a = {1, 3, 4, 5, 8, 2, 1, 4, 5, 9, 5};
-        System.out.println(solution(a,"right"));
+    public static void main(String[] args){
+        int[] numbers = {1,3,4,5,8,2,1,4,5,9,5};
+        String hand = "right";
+        System.out.println(solution(numbers,hand));
     }
     public static String solution(int[] numbers, String hand) {
         String answer = "";
@@ -47,5 +48,4 @@ public class Pro67256 {
         int numY = 1;
         return Math.abs(handX-numX)+Math.abs(handY-numY);
     }
-
 }

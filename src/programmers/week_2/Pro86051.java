@@ -2,8 +2,8 @@ package programmers.week_2;
 
 public class Pro86051 {
     public static void main(String[] args) {
-        int[] a = {5,8,4,0,6,7,9};
-        System.out.println(solution(a));
+        int[] numbers = {1,2,3,4,6,7,8,0};
+        System.out.println(solution(numbers));
     }
     public static int solution(int[] numbers) {
         int answer = 45;

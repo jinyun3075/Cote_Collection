@@ -2,11 +2,12 @@ package programmers.week_1;
 import java.util.Stack;
 
 public class Pro64061 {
-    public static void main(String[] args){
-        int[][] b = {{0,0,0,0,},{1,2,4,0},{3,2,4,1},{1,2,3,1}};
-        int[] m ={2,3,2,4,1}; //24211
-        System.out.println(solution(b,m));
+    public static void main(String[] args) {
+        int[][] board = {{0,0,0,0,0},{0,0,1,0,3},{0,2,5,0,1},{4,2,4,4,2},{3,5,1,3,1}};
+        int[] moves = {1,5,3,5,1,2,1,4};
+        System.out.println(solution(board,moves));
     }
+
     public static int solution(int[][] board, int[] moves) {
         int answer = 0;
         int cnt=moves.length;
