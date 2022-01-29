@@ -2,22 +2,57 @@ import java.util.*;
 public class Main {
     public static void main(String[] args) {
        Scanner sc = new Scanner(System.in);
-       StringBuilder sb = new StringBuilder();
+       StringBuilder sb= new StringBuilder();
+       final int DIV = 1000000009;
        int T = sc.nextInt();
-       int[] dp = new int[11];
-       dp[1] = 1;
-       dp[2] = 2;
+       long[][] dp = new long[100001][4];
+       dp[1][1] = 1;
+       dp[2][2] = 1;
+       dp[3][1] = 1;
+       dp[3][2] = 1;
+       dp[3][3] = 1;
 
        while(T-->0) {
            int n = sc.nextInt();
            for(int i = 4 ; i <= n ; i++) {
-               dp[i] = dp[i-3] + dp[i-2] + dp[i-1];
+               if(dp[i][1]==0 && dp[i][2]==0 && dp[i][3]==0){
+                   dp[i][1] = dp[i-1][2]+dp[i-1][3]%DIV;
+                   dp[i][2] = dp[i-2][1]+dp[i-2][3]%DIV;
+                   dp[i][3] = dp[i-3][1]+dp[i-3][2]%DIV;
+               }
            }
-           sb.append(dp[n]).append("\n");
+           sb.append((dp[n][1]+dp[n][2]+dp[n][3])%DIV).append("\n");
        }
        System.out.print(sb);
     }
 }
+/* 1, 2, 3 더하고 5 */
+//    public static void main(String[] args) {
+//        Scanner sc = new Scanner(System.in);
+//        StringBuilder sb= new StringBuilder();
+//        final int DIV = 1000000009;
+//        int T = sc.nextInt();
+//        long[][] dp = new long[100001][4];
+//        dp[1][1] = 1;
+//        dp[2][2] = 1;
+//        dp[3][1] = 1;
+//        dp[3][2] = 1;
+//        dp[3][3] = 1;
+//
+//        while(T-->0) {
+//            int n = sc.nextInt();
+//            for(int i = 4 ; i <= n ; i++) {
+//                if(dp[i][1]==0 && dp[i][2]==0 && dp[i][3]==0){
+//                    dp[i][1] = dp[i-1][2]+dp[i-1][3]%DIV;
+//                    dp[i][2] = dp[i-2][1]+dp[i-2][3]%DIV;
+//                    dp[i][3] = dp[i-3][1]+dp[i-3][2]%DIV;
+//                }
+//            }
+//            sb.append((dp[n][1]+dp[n][2]+dp[n][3])%DIV).append("\n");
+//        }
+//        System.out.print(sb);
+//    }
+
 /* 카드 구매하기 2 */
 //    public static void main(String[] args) {
 //        Scanner sc = new Scanner(System.in);
