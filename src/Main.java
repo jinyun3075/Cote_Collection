@@ -1,31 +1,49 @@
 import java.util.*;
 public class Main {
     public static void main(String[] args) {
-       Scanner sc = new Scanner(System.in);
-       StringBuilder sb= new StringBuilder();
-       final int DIV = 1000000009;
-       int T = sc.nextInt();
-       long[][] dp = new long[100001][4];
-       dp[1][1] = 1;
-       dp[2][2] = 1;
-       dp[3][1] = 1;
-       dp[3][2] = 1;
-       dp[3][3] = 1;
-
-       while(T-->0) {
-           int n = sc.nextInt();
-           for(int i = 4 ; i <= n ; i++) {
-               if(dp[i][1]==0 && dp[i][2]==0 && dp[i][3]==0){
-                   dp[i][1] = dp[i-1][2]+dp[i-1][3]%DIV;
-                   dp[i][2] = dp[i-2][1]+dp[i-2][3]%DIV;
-                   dp[i][3] = dp[i-3][1]+dp[i-3][2]%DIV;
-               }
-           }
-           sb.append((dp[n][1]+dp[n][2]+dp[n][3])%DIV).append("\n");
-       }
-       System.out.print(sb);
+        Scanner sc = new Scanner(System.in);
+        final int DIV = 1000000000;
+        int n = sc.nextInt();
+        long[][] dp = new long[n+1][10];
+        long result = 0;
+        for(int i = 1 ;i < 10 ;i++) {
+            dp[1][i] =1;
+        }
+        for(int i = 2 ; i <= n ; i++) {
+            for(int j = 1 ; j < 9 ; j ++) {
+                dp[i][j] = (dp[i-1][j-1] + dp[i-1][j+1]) % DIV;
+            }
+            dp[i][9] = dp[i-1][8] % DIV;
+            dp[i][0] = dp[i-1][1] % DIV;
+        }
+        for(int i = 0 ;i < 10 ;i++) {
+            result += dp[n][i] % DIV;
+        }
+        System.out.print(result % DIV);
     }
 }
+/* 쉬운 계단 수 */
+//    public static void main(String[] args) {
+//        Scanner sc = new Scanner(System.in);
+//        final int DIV = 1000000000;
+//        int n = sc.nextInt();
+//        long[][] dp = new long[n+1][10];
+//        long result = 0;
+//        for(int i = 1 ;i < 10 ;i++) {
+//            dp[1][i] =1;
+//        }
+//        for(int i = 2 ; i <= n ; i++) {
+//            for(int j = 1 ; j < 9 ; j ++) {
+//                dp[i][j] = (dp[i-1][j-1] + dp[i-1][j+1]) % DIV;
+//            }
+//            dp[i][9] = dp[i-1][8] % DIV;
+//            dp[i][0] = dp[i-1][1] % DIV;
+//        }
+//        for(int i = 0 ;i < 10 ;i++) {
+//            result += dp[n][i] % DIV;
+//        }
+//        System.out.print(result % DIV);
+//    }
 /* 1, 2, 3 더하고 5 */
 //    public static void main(String[] args) {
 //        Scanner sc = new Scanner(System.in);
