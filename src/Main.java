@@ -2,26 +2,29 @@ import java.util.*;
 public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        final int DIV = 1000000000;
         int n = sc.nextInt();
-        long[][] dp = new long[n+1][10];
-        long result = 0;
-        for(int i = 1 ;i < 10 ;i++) {
-            dp[1][i] =1;
+        long[] dp = new long[n+1];
+        dp[1]=1;
+
+        for(int i=2 ;i <=n;i++) {
+            dp[i] = dp[i-1] + dp[i-2];
         }
-        for(int i = 2 ; i <= n ; i++) {
-            for(int j = 1 ; j < 9 ; j ++) {
-                dp[i][j] = (dp[i-1][j-1] + dp[i-1][j+1]) % DIV;
-            }
-            dp[i][9] = dp[i-1][8] % DIV;
-            dp[i][0] = dp[i-1][1] % DIV;
-        }
-        for(int i = 0 ;i < 10 ;i++) {
-            result += dp[n][i] % DIV;
-        }
-        System.out.print(result % DIV);
+        System.out.print(dp[n]);
     }
 }
+/* 이친수 */
+//    public static void main(String[] args) {
+//        Scanner sc = new Scanner(System.in);
+//        int n = sc.nextInt();
+//        long[][] dp = new long[n+1][2];
+//        dp[1][1]=1;
+//
+//        for(int i=2 ;i <=n;i++) {
+//            dp[i][0] = dp[i-1][0] + dp[i-1][1];
+//            dp[i][1] = dp[i-1][0];
+//        }
+//        System.out.print(dp[n][0]+dp[n][1]);
+//    }
 /* 쉬운 계단 수 */
 //    public static void main(String[] args) {
 //        Scanner sc = new Scanner(System.in);
