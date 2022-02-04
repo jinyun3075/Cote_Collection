@@ -2,16 +2,31 @@ import java.util.*;
 public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        int n = sc.nextInt();
-        long[] dp = new long[n+1];
-        dp[1]=1;
-
-        for(int i=2 ;i <=n;i++) {
-            dp[i] = dp[i-1] + dp[i-2];
-        }
-        System.out.print(dp[n]);
     }
 }
+/* 가장 긴 증가하는 부분 수열 */
+
+//    public static void main(String[] args) {
+//        Scanner sc = new Scanner(System.in);
+//        int n = sc.nextInt();
+//        int[] dp = new int[n];
+//        int[] le = new int[n];
+//        int result = 0;
+//        for (int i =0 ;i<n;i++){
+//            le[i]=sc.nextInt();
+//        }
+//        for(int i = 0; i<n;i++) {
+//            dp[i] = 1;
+//            for(int j = i-1; j>=0;j--){
+//                if(le[j]<le[i]){
+//                    dp[i] = Math.max(dp[j] + 1,dp[i]);
+//                }
+//            }
+//            result =Math.max(result,dp[i]);
+//        }
+//        System.out.print(result);
+//    }
+
 /* 이친수 */
 //    public static void main(String[] args) {
 //        Scanner sc = new Scanner(System.in);
