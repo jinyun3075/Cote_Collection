@@ -2,8 +2,68 @@ import java.util.*;
 public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int[] dp = new int[n];
+        int[] le = new int[n];
+        int result = 0;
+        for (int i =0 ;i<n;i++){
+            le[i]=sc.nextInt();
+        }
+        for(int i = 0; i<n;i++) {
+            dp[i] = 1;
+            for(int j = i-1; j>=0;j--){
+                if(le[j]<le[i]){
+                    dp[i] = Math.max(dp[j] + 1,dp[i]);
+                }
+            }
+            result =Math.max(result,dp[i]);
+        }
+        Stack<Integer> st = new Stack<>();
+        int val = result;
+        for(int i = n-1;i>=0;i--) {
+            if(val==dp[i]){
+                st.push(le[i]);
+                val--;
+            }
+        }
+        System.out.println(result);
+        while(!st.isEmpty()) {
+            System.out.print(st.pop()+" ");
+        }
     }
 }
+/* 가장 긴 증가하는 부분 수열 4*/
+//    public static void main(String[] args) {
+//        Scanner sc = new Scanner(System.in);
+//        int n = sc.nextInt();
+//        int[] dp = new int[n];
+//        int[] le = new int[n];
+//        int result = 0;
+//        for (int i =0 ;i<n;i++){
+//            le[i]=sc.nextInt();
+//        }
+//        for(int i = 0; i<n;i++) {
+//            dp[i] = 1;
+//            for(int j = i-1; j>=0;j--){
+//                if(le[j]<le[i]){
+//                    dp[i] = Math.max(dp[j] + 1,dp[i]);
+//                }
+//            }
+//            result =Math.max(result,dp[i]);
+//        }
+//        Stack<Integer> st = new Stack<>();
+//        int val = result;
+//        for(int i = n-1;i>=0;i--) {
+//            if(val==dp[i]){
+//                st.push(le[i]);
+//                val--;
+//            }
+//        }
+//        System.out.println(result);
+//        while(!st.isEmpty()) {
+//            System.out.print(st.pop()+" ");
+//        }
+//    }
 /* 가장 긴 증가하는 부분 수열 */
 
 //    public static void main(String[] args) {
