@@ -2,32 +2,46 @@ import java.util.*;
 public class Main {
     public static void main(String[] args) {
        Scanner sc = new Scanner(System.in);
-       StringBuilder sb = new StringBuilder();
-       final int DIV = 1000000009;
-       int test = sc.nextInt();
-       long[][] dp = new long[1000001][4];
-       dp[1][1] = 1;
-       dp[2][1] = 1;
-       dp[2][2] = 1;
-       dp[3][1] = 2;
-       dp[3][2] = 1;
-       dp[3][3] = 1;
-       while(test-->0){
-        int n = sc.nextInt();
-        for(int i = 4 ; i <=n ; i++) {
-            if(dp[i][0] == 0 ) {
-                dp[i][1] = dp[i-1][1] + dp[i-1][2] + dp[i-1][3] % DIV;
-                dp[i][2] = dp[i-2][1] + dp[i-2][2] + dp[i-2][3] % DIV;
-                dp[i][3] = dp[i-3][1] + dp[i-3][2] + dp[i-3][3] % DIV;
-                dp[i][0] =1;
-            }
-        }
-        long val = dp[n][1]+dp[n][2]+dp[n][3] % DIV;
-        sb.append(val).append('\n');
+       int n = sc.nextInt();
+       int[][] col = new int[n][3];
+       int[][] dp = new int[n][3];
+       for(int i =0 ; i < n ; i++) {
+           col[i][0] = sc.nextInt();
+           col[i][1] = sc.nextInt();
+           col[i][2] = sc.nextInt();
        }
-       System.out.print(sb);
+       dp[0][0] = col[0][0];
+       dp[0][1] = col[0][1];
+       dp[0][2] = col[0][2];
+       for(int i = 1 ; i < n ; i++) {
+           dp[i][0] = Math.min(dp[i-1][1],dp[i-1][2])+col[i][0];
+           dp[i][1] = Math.min(dp[i-1][0],dp[i-1][2])+col[i][1];
+           dp[i][2] = Math.min(dp[i-1][1],dp[i-1][0])+col[i][2];
+       }
+       System.out.print(Math.min(dp[n-1][0],Math.min(dp[n-1][1],dp[n-1][2])));
     }
 }
+/* RGB거리 */
+//    public static void main(String[] args) {
+//       Scanner sc = new Scanner(System.in);
+//       int n = sc.nextInt();
+//       int[][] col = new int[n][3];
+//       int[][] dp = new int[n][3];
+//       for(int i =0 ; i < n ; i++) {
+//           col[i][0] = sc.nextInt();
+//           col[i][1] = sc.nextInt();
+//           col[i][2] = sc.nextInt();
+//       }
+//       dp[0][0] = col[0][0];
+//       dp[0][1] = col[0][1];
+//       dp[0][2] = col[0][2];
+//       for(int i = 1 ; i < n ; i++) {
+//           dp[i][0] = Math.min(dp[i-1][1],dp[i-1][2])+col[i][0];
+//           dp[i][1] = Math.min(dp[i-1][0],dp[i-1][2])+col[i][1];
+//           dp[i][2] = Math.min(dp[i-1][1],dp[i-1][0])+col[i][2];
+//       }
+//       System.out.print(Math.min(dp[n-1][0],Math.min(dp[n-1][1],dp[n-1][2])));
+//    }
 /* 얀속합*/
 //    public static void main(String[] args) {
 //        Scanner sc = new Scanner(System.in);
