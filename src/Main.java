@@ -1,26 +1,39 @@
-import java.util.*;
+import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
        Scanner sc = new Scanner(System.in);
        int n = sc.nextInt();
-       int[][] col = new int[n][3];
        int[][] dp = new int[n][3];
-       for(int i =0 ; i < n ; i++) {
-           col[i][0] = sc.nextInt();
-           col[i][1] = sc.nextInt();
-           col[i][2] = sc.nextInt();
+       dp[0][0] = 1;
+       dp[0][1] = 1;
+       dp[0][2] = 1;
+
+       for (int i = 1 ; i < n ; i++) {
+           dp[i][0] = dp[i-1][1] + dp[i-1][2] + dp[i-1][0];
+           dp[i][1] = dp[i-1][0] + dp[i-1][2];
+           dp[i][2] = dp[i-1][1] + dp[i-1][0];
        }
-       dp[0][0] = col[0][0];
-       dp[0][1] = col[0][1];
-       dp[0][2] = col[0][2];
-       for(int i = 1 ; i < n ; i++) {
-           dp[i][0] = Math.min(dp[i-1][1],dp[i-1][2])+col[i][0];
-           dp[i][1] = Math.min(dp[i-1][0],dp[i-1][2])+col[i][1];
-           dp[i][2] = Math.min(dp[i-1][1],dp[i-1][0])+col[i][2];
-       }
-       System.out.print(Math.min(dp[n-1][0],Math.min(dp[n-1][1],dp[n-1][2])));
+       int val = (dp[n-1][0]+dp[n-1][1]+dp[n-1][2]);
+       System.out.print(val);
     }
 }
+/* 동물원 */
+//public static void main(String[] args) {
+//    Scanner sc = new Scanner(System.in);
+//    int n = sc.nextInt();
+//    int[][] dp = new int[n][3];
+//    dp[0][0] = 1;
+//    dp[0][1] = 1;
+//    dp[0][2] = 1;
+//
+//    for (int i = 1 ; i < n ; i++) {
+//        dp[i][0] = dp[i-1][1] + dp[i-1][2] + dp[i-1][0];
+//        dp[i][1] = dp[i-1][0] + dp[i-1][2];
+//        dp[i][2] = dp[i-1][1] + dp[i-1][0];
+//    }
+//    int val = (dp[n-1][0]+dp[n-1][1]+dp[n-1][2]);
+//    System.out.print(val);
+//}
 /* RGB거리 */
 //    public static void main(String[] args) {
 //       Scanner sc = new Scanner(System.in);
