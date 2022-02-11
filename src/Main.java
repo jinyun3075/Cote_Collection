@@ -2,21 +2,58 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
        Scanner sc = new Scanner(System.in);
-       int n = sc.nextInt();
-       int[][] dp = new int[n][3];
-       dp[0][0] = 1;
-       dp[0][1] = 1;
-       dp[0][2] = 1;
-
-       for (int i = 1 ; i < n ; i++) {
-           dp[i][0] = dp[i-1][1] + dp[i-1][2] + dp[i-1][0];
-           dp[i][1] = dp[i-1][0] + dp[i-1][2];
-           dp[i][2] = dp[i-1][1] + dp[i-1][0];
+       StringBuilder sb = new StringBuilder();
+       int test = sc.nextInt();
+       while(test-->0) {
+           int n = sc.nextInt();
+           int[][] dp = new int[n][3];
+           int[][] sticker = new int[n][2];
+           for(int i=0;i<n;i++) {
+               sticker[i][0] = sc.nextInt();
+           }
+           for(int i=0;i<n;i++) {
+               sticker[i][1] = sc.nextInt();
+           }
+           dp[0][0] = sticker[0][0];
+           dp[0][1] = sticker[0][1];
+           for(int i = 1 ;i < n ; i++) {
+               dp[i][0] = Math.max(dp[i-1][1],dp[i-1][2])+sticker[i][0];
+               dp[i][1] = Math.max(dp[i-1][0],dp[i-1][2])+sticker[i][1];
+               dp[i][2] = Math.max(dp[i-1][0],dp[i-1][1]);
+           }
+           int val = Math.max(dp[n-1][0],dp[n-1][1]);
+           sb.append(val).append('\n');
        }
-       int val = (dp[n-1][0]+dp[n-1][1]+dp[n-1][2]);
-       System.out.print(val);
+       System.out.print(sb);
     }
 }
+/* 스티커 */
+//    public static void main(String[] args) {
+//       Scanner sc = new Scanner(System.in);
+//       StringBuilder sb = new StringBuilder();
+//       int test = sc.nextInt();
+//       while(test-->0) {
+//           int n = sc.nextInt();
+//           int[][] dp = new int[n][3];
+//           int[][] sticker = new int[n][2];
+//           for(int i=0;i<n;i++) {
+//               sticker[i][0] = sc.nextInt();
+//           }
+//           for(int i=0;i<n;i++) {
+//               sticker[i][1] = sc.nextInt();
+//           }
+//           dp[0][0] = sticker[0][0];
+//           dp[0][1] = sticker[0][1];
+//           for(int i = 1 ;i < n ; i++) {
+//               dp[i][0] = Math.max(dp[i-1][1],dp[i-1][2])+sticker[i][0];
+//               dp[i][1] = Math.max(dp[i-1][0],dp[i-1][2])+sticker[i][1];
+//               dp[i][2] = Math.max(dp[i-1][0],dp[i-1][1]);
+//           }
+//           int val = Math.max(dp[n-1][0],dp[n-1][1]);
+//           sb.append(val).append('\n');
+//       }
+//       System.out.print(sb);
+//    }
 /* 동물원 */
 //public static void main(String[] args) {
 //    Scanner sc = new Scanner(System.in);
