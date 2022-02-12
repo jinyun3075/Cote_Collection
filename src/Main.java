@@ -1,32 +1,40 @@
 import java.util.Scanner;
+
 public class Main {
     public static void main(String[] args) {
-       Scanner sc = new Scanner(System.in);
-       StringBuilder sb = new StringBuilder();
-       int test = sc.nextInt();
-       while(test-->0) {
-           int n = sc.nextInt();
-           int[][] dp = new int[n][3];
-           int[][] sticker = new int[n][2];
-           for(int i=0;i<n;i++) {
-               sticker[i][0] = sc.nextInt();
-           }
-           for(int i=0;i<n;i++) {
-               sticker[i][1] = sc.nextInt();
-           }
-           dp[0][0] = sticker[0][0];
-           dp[0][1] = sticker[0][1];
-           for(int i = 1 ;i < n ; i++) {
-               dp[i][0] = Math.max(dp[i-1][1],dp[i-1][2])+sticker[i][0];
-               dp[i][1] = Math.max(dp[i-1][0],dp[i-1][2])+sticker[i][1];
-               dp[i][2] = Math.max(dp[i-1][0],dp[i-1][1]);
-           }
-           int val = Math.max(dp[n-1][0],dp[n-1][1]);
-           sb.append(val).append('\n');
-       }
-       System.out.print(sb);
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int k = sc.nextInt();
+
+        int[][] dp = new int[n + 1][k + 1];
+        for (int i = 1; i <= k; i++) {
+            dp[0][i] = 1;
+        }
+        for (int i = 1; i <= n; i++) {
+            for (int j = 1; j <= k; j++) {
+                dp[i][j] = (dp[i - 1][j] + dp[i][j - 1])%1000000000;
+            }
+        }
+        System.out.println(dp[n][k]);
     }
 }
+/* 합분해 */
+//    public static void main(String[] args) {
+//        Scanner sc = new Scanner(System.in);
+//        int n = sc.nextInt();
+//        int k = sc.nextInt();
+//
+//        int[][] dp = new int[n + 1][k + 1];
+//        for (int i = 1; i <= k; i++) {
+//            dp[0][i] = 1;
+//        }
+//        for (int i = 1; i <= n; i++) {
+//            for (int j = 1; j <= k; j++) {
+//                dp[i][j] = (dp[i - 1][j] + dp[i][j - 1])%1000000000;
+//            }
+//        }
+//        System.out.println(dp[n][k]);
+//    }
 /* 스티커 */
 //    public static void main(String[] args) {
 //       Scanner sc = new Scanner(System.in);
