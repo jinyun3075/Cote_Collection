@@ -1,23 +1,58 @@
 import java.util.Scanner;
 
 public class Main {
+    static int N ;
+    static Long dp[][] ;
+    final static int DIV = 1000000000;
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        int n = sc.nextInt();
+        N=  sc.nextInt();
         int k = sc.nextInt();
-
-        int[][] dp = new int[n + 1][k + 1];
-        for (int i = 1; i <= k; i++) {
-            dp[0][i] = 1;
+        dp = new Long[N+1][k+1];
+        System.out.println(dfs(N,k)%DIV);
+    }
+    static public long dfs(int n, int k) {
+        if(k==1){
+            return 1;
         }
-        for (int i = 1; i <= n; i++) {
-            for (int j = 1; j <= k; j++) {
-                dp[i][j] = (dp[i - 1][j] + dp[i][j - 1])%1000000000;
+        if(dp[n][k] == null){
+            dp[n][k] =0l;
+            for(int i=0;i<=N;i++) {
+                if(n-i<0){
+                    break;
+                }
+                dp[n][k] += dfs(n-i,k-1);
             }
         }
-        System.out.println(dp[n][k]);
+        return dp[n][k] % DIV;
     }
 }
+/* 합분해 (DFS)*/
+//static int N ;
+//    static Long dp[][] ;
+//    final static int DIV = 1000000000;
+//    public static void main(String[] args) {
+//        Scanner sc = new Scanner(System.in);
+//        N=  sc.nextInt();
+//        int k = sc.nextInt();
+//        dp = new Long[N+1][k+1];
+//        System.out.println(dfs(N,k)%DIV);
+//    }
+//    static public long dfs(int n, int k) {
+//        if(k==1){
+//            return 1;
+//        }
+//        if(dp[n][k] == null){
+//            dp[n][k] =0l;
+//            for(int i=0;i<=N;i++) {
+//                if(n-i<0){
+//                    break;
+//                }
+//                dp[n][k] += dfs(n-i,k-1);
+//            }
+//        }
+//        return dp[n][k] % DIV;
+//    }
 /* 합분해 */
 //    public static void main(String[] args) {
 //        Scanner sc = new Scanner(System.in);
