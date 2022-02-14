@@ -1,32 +1,78 @@
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.Scanner;
 
 public class Main {
-    static int N ;
-    static Long dp[][] ;
-    final static int DIV = 1000000000;
+    static int all = 0;
+    static int child[] = new int[9];
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        N=  sc.nextInt();
-        int k = sc.nextInt();
-        dp = new Long[N+1][k+1];
-        System.out.println(dfs(N,k)%DIV);
-    }
-    static public long dfs(int n, int k) {
-        if(k==1){
-            return 1;
+        for( int i=0;i<9;i++) {
+            child[i] = sc.nextInt();
+            all+=child[i];
         }
-        if(dp[n][k] == null){
-            dp[n][k] =0l;
-            for(int i=0;i<=N;i++) {
-                if(n-i<0){
-                    break;
+        Arrays.sort(child);
+        int[] index = val();
+        for(int i=0;i<9;i++) {
+            if(i==index[0]||i==index[1]){
+                continue;
+            }
+            System.out.println(child[i]);
+        }
+    }
+    static int[] val() {
+        int re[] = new int[2];
+        for(int i=0;i<9;i++) {
+            for(int j=0;j<9;j++) {
+                if(i==j){
+                    continue;
                 }
-                dp[n][k] += dfs(n-i,k-1);
+                if(all-(child[i]+child[j]) == 100) {
+                    re[0]=i;
+                    re[1]=j;
+                    return re;
+                }
             }
         }
-        return dp[n][k] % DIV;
+
+        return re;
     }
 }
+/* 일곱 난쟁이 */
+//    static int all = 0;
+//    static int child[] = new int[9];
+//    public static void main(String[] args) {
+//        Scanner sc = new Scanner(System.in);
+//        for( int i=0;i<9;i++) {
+//            child[i] = sc.nextInt();
+//            all+=child[i];
+//        }
+//        Arrays.sort(child);
+//        int[] index = val();
+//        for(int i=0;i<9;i++) {
+//            if(i==index[0]||i==index[1]){
+//                continue;
+//            }
+//            System.out.println(child[i]);
+//        }
+//    }
+//    static int[] val() {
+//        int re[] = new int[2];
+//        for(int i=0;i<9;i++) {
+//            for(int j=0;j<9;j++) {
+//                if(i==j){
+//                    continue;
+//                }
+//                if(all-(child[i]+child[j]) == 100) {
+//                    re[0]=i;
+//                    re[1]=j;
+//                    return re;
+//                }
+//            }
+//        }
+//
+//        return re;
+//    }
 /* 합분해 (DFS)*/
 //static int N ;
 //    static Long dp[][] ;
