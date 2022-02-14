@@ -1,43 +1,139 @@
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.Scanner;
 
 public class Main {
-    static int all = 0;
-    static int child[] = new int[9];
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        for( int i=0;i<9;i++) {
-            child[i] = sc.nextInt();
-            all+=child[i];
-        }
-        Arrays.sort(child);
-        int[] index = val();
-        for(int i=0;i<9;i++) {
-            if(i==index[0]||i==index[1]){
-                continue;
+    static Scanner sc = new Scanner(System.in);
+    char[][] map;
+    int val =0;
+    int n ;
+    public static void main(String[] args){
+        int n = sc.nextInt();
+        sc.nextLine();
+        Main logic = new Main(n);
+
+        for(int i=0;i<n;i++) {
+            for(int j=0;j<n-1;j++) {
+                logic.verticalTemp(i,j);
+                logic.check();
+                logic.verticalTemp(i,j);
+
+                logic.horizontalTemp(i,j);
+                logic.check();
+                logic.horizontalTemp(i,j);
             }
-            System.out.println(child[i]);
+        }
+        System.out.println(logic.val);
+        sc.close();
+    }
+
+    Main (int n) {
+        this.n = n;
+        map = new char[n][n];
+        for(int i=0;i<n;i++) {
+            String input = sc.nextLine();
+            for(int j=0;j<n;j++) {
+                map[i][j] = input.charAt(j);
+            }
         }
     }
-    static int[] val() {
-        int re[] = new int[2];
-        for(int i=0;i<9;i++) {
-            for(int j=0;j<9;j++) {
-                if(i==j){
-                    continue;
+    void horizontalTemp(int i, int j) {
+        char temp =map[i][j];
+        map[i][j] = map[i][j+1];
+        map[i][j+1] = temp;
+    }
+    void verticalTemp(int i, int j) {
+        char temp =map[j][i];
+        map[j][i] = map[j+1][i];
+        map[j+1][i] = temp;
+    }
+    void check() {
+        for(int i=0;i<n;i++){
+            int hCount = 1;
+            int vCount = 1;
+            for(int j=0;j<n-1;j++){
+                if(map[i][j]==map[i][j+1]){
+                    hCount++;
+                    val = Math.max(val,hCount);
+                }else{
+                    hCount=1;
                 }
-                if(all-(child[i]+child[j]) == 100) {
-                    re[0]=i;
-                    re[1]=j;
-                    return re;
+                if(map[j][i]==map[j+1][i]){
+                    vCount++;
+                    val = Math.max(val,vCount);
+                }else{
+                    vCount=1;
                 }
             }
         }
-
-        return re;
     }
 }
+
+/* 사탕게임 */
+//public class CandyGame {
+//    static Scanner sc = new Scanner(System.in);
+//    char[][] map;
+//    int val =0;
+//    int n ;
+//    public static void main(String[] args){
+//        int n = sc.nextInt();
+//        sc.nextLine();
+//        CandyGame logic = new CandyGame(n);
+//
+//        for(int i=0;i<n;i++) {
+//            for(int j=0;j<n-1;j++) {
+//                logic.verticalTemp(i,j);
+//                logic.check();
+//                logic.verticalTemp(i,j);
+//
+//                logic.horizontalTemp(i,j);
+//                logic.check();
+//                logic.horizontalTemp(i,j);
+//            }
+//        }
+//        System.out.println(logic.val);
+//        sc.close();
+//    }
+//
+//    Main (int n) {
+//        this.n = n;
+//        map = new char[n][n];
+//        for(int i=0;i<n;i++) {
+//            String input = sc.nextLine();
+//            for(int j=0;j<n;j++) {
+//                map[i][j] = input.charAt(j);
+//            }
+//        }
+//    }
+//    void horizontalTemp(int i, int j) {
+//        char temp =map[i][j];
+//        map[i][j] = map[i][j+1];
+//        map[i][j+1] = temp;
+//    }
+//    void verticalTemp(int i, int j) {
+//        char temp =map[j][i];
+//        map[j][i] = map[j+1][i];
+//        map[j+1][i] = temp;
+//    }
+//    void check() {
+//        for(int i=0;i<n;i++){
+//            int hCount = 1;
+//            int vCount = 1;
+//            for(int j=0;j<n-1;j++){
+//                if(map[i][j]==map[i][j+1]){
+//                    hCount++;
+//                    val = Math.max(val,hCount);
+//                }else{
+//                    hCount=1;
+//                }
+//                if(map[j][i]==map[j+1][i]){
+//                    vCount++;
+//                    val = Math.max(val,vCount);
+//                }else{
+//                    vCount=1;
+//                }
+//            }
+//        }
+//    }
+//}
 /* 일곱 난쟁이 */
 //    static int all = 0;
 //    static int child[] = new int[9];
