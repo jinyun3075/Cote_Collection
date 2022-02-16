@@ -1,72 +1,86 @@
 import java.util.Scanner;
 
 public class Main {
-    static Scanner sc = new Scanner(System.in);
-    char[][] map;
-    int val =0;
-    int n ;
-    public static void main(String[] args){
+    public static void main(String[] args) {
         int n = sc.nextInt();
-        sc.nextLine();
-        Main logic = new Main(n);
+        int m = sc.nextInt();
+        int result = Math.abs(n - 100);
+        Main remote = new Main(m);
 
-        for(int i=0;i<n;i++) {
-            for(int j=0;j<n-1;j++) {
-                logic.verticalTemp(i,j);
-                logic.check();
-                logic.verticalTemp(i,j);
-
-                logic.horizontalTemp(i,j);
-                logic.check();
-                logic.horizontalTemp(i,j);
-            }
+        for(int i=0;i<1000000;i++) {
+           int btn = remote.logic(i);
+           if(btn>0) result = Math.min(result, Math.abs(n-i)+btn);
         }
-        System.out.println(logic.val);
-        sc.close();
+        System.out.println(result);
     }
 
-    Main (int n) {
-        this.n = n;
-        map = new char[n][n];
-        for(int i=0;i<n;i++) {
-            String input = sc.nextLine();
-            for(int j=0;j<n;j++) {
-                map[i][j] = input.charAt(j);
-            }
+    boolean error[] = new boolean[10];
+    static Scanner sc = new Scanner(System.in);
+
+    Main(int iter){
+        for (int i = 0; i < iter; i++) {
+            error[sc.nextInt()] = true;
         }
     }
-    void horizontalTemp(int i, int j) {
-        char temp =map[i][j];
-        map[i][j] = map[i][j+1];
-        map[i][j+1] = temp;
-    }
-    void verticalTemp(int i, int j) {
-        char temp =map[j][i];
-        map[j][i] = map[j+1][i];
-        map[j+1][i] = temp;
-    }
-    void check() {
-        for(int i=0;i<n;i++){
-            int hCount = 1;
-            int vCount = 1;
-            for(int j=0;j<n-1;j++){
-                if(map[i][j]==map[i][j+1]){
-                    hCount++;
-                    val = Math.max(val,hCount);
-                }else{
-                    hCount=1;
-                }
-                if(map[j][i]==map[j+1][i]){
-                    vCount++;
-                    val = Math.max(val,vCount);
-                }else{
-                    vCount=1;
-                }
+    int logic(int n) {
+        if(n == 0) {
+            if(error[n]) {
+                return 0;
             }
+            return 1;
         }
+        int count = 0;
+        while(n>0) {
+            if(error[n%10]) {
+                return 0;
+            }
+            count++;
+            n= n/10;
+        }
+        return count;
     }
 }
-
+/* 리모컨 */
+//public class Main {
+//    public static void main(String[] args) {
+//        int n = sc.nextInt();
+//        int m = sc.nextInt();
+//        int result = Math.abs(n - 100);
+//        Main remote = new Main(m);
+//
+//        for(int i=0;i<1000000;i++) {
+//           int btn = remote.logic(i);
+//           if(btn>0) result = Math.min(result, Math.abs(n-i)+btn);
+//        }
+//        System.out.println(result);
+//    }
+//
+//    boolean error[] = new boolean[10];
+//    static Scanner sc = new Scanner(System.in);
+//
+//    Main(int iter){
+//        for (int i = 0; i < iter; i++) {
+//            error[sc.nextInt()] = true;
+//        }
+//    }
+//    int logic(int n) {
+//        if(n == 0) {
+//            if(error[n]) {
+//                return 0;
+//            }
+//            return 1;
+//        }
+//        int count = 0;
+//        while(n>0) {
+//            if(error[n%10]) {
+//                return 0;
+//            }
+//            count++;
+//            n= n/10;
+//        }
+//        return count;
+//    }
+//}
 /* 사탕게임 */
 //public class CandyGame {
 //    static Scanner sc = new Scanner(System.in);
