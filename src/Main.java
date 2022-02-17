@@ -2,44 +2,37 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
         int n = sc.nextInt();
-        int m = sc.nextInt();
-        int result = Math.abs(n - 100);
-        Main remote = new Main(m);
-
-        for(int i=0;i<1000000;i++) {
-           int btn = remote.logic(i);
-           if(btn>0) result = Math.min(result, Math.abs(n-i)+btn);
+        int more = 1;
+        int result =0;
+        int div = 10;
+        for(int i=1;i<=n;i++) {
+            if(i%div==0) {
+                div*=10;
+                more++;
+            }
+            result += more;
         }
         System.out.println(result);
     }
-
-    boolean error[] = new boolean[10];
-    static Scanner sc = new Scanner(System.in);
-
-    Main(int iter){
-        for (int i = 0; i < iter; i++) {
-            error[sc.nextInt()] = true;
-        }
-    }
-    int logic(int n) {
-        if(n == 0) {
-            if(error[n]) {
-                return 0;
-            }
-            return 1;
-        }
-        int count = 0;
-        while(n>0) {
-            if(error[n%10]) {
-                return 0;
-            }
-            count++;
-            n= n/10;
-        }
-        return count;
-    }
 }
+/* 수 이어 쓰기 1 */
+//    public static void main(String[] args) {
+//        Scanner sc = new Scanner(System.in);
+//        int n = sc.nextInt();
+//        int more = 1;
+//        int result =0;
+//        int div = 10;
+//        for(int i=1;i<=n;i++) {
+//            if(i%div==0) {
+//                div*=10;
+//                more++;
+//            }
+//            result += more;
+//        }
+//        System.out.println(result);
+//    }
 /* 리모컨 */
 //public class Main {
 //    public static void main(String[] args) {
