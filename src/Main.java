@@ -1,22 +1,72 @@
 import java.util.Scanner;
 
 public class Main {
+    static StringBuilder sb = new StringBuilder();
+    static int[] arr;
+    static boolean[] check;
+    static int N;
+    static int M;
+
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        int n = sc.nextInt();
-        int more = 1;
-        int result =0;
-        int div = 10;
-        for(int i=1;i<=n;i++) {
-            if(i%div==0) {
-                div*=10;
-                more++;
+        N = sc.nextInt();
+        M = sc.nextInt();
+        arr = new int[M];
+        check = new boolean[N+1];
+        logic(0);
+        System.out.println(sb);
+    }
+    public static void logic(int m) {
+        if (m == M) {
+            for(int i : arr) {
+                sb.append(i).append(" ");
             }
-            result += more;
+            sb.append("\n");
+            return;
         }
-        System.out.println(result);
+        for (int i = 1; i <= N; i++) {
+            if(!check[i]){
+                arr[m] = i;
+                check[i]= true;
+                logic(m+1);
+                check[i] = false;
+            }
+        }
     }
 }
+/* N과 M(1) */
+//    static StringBuilder sb = new StringBuilder();
+//    static int[] arr;
+//    static boolean[] check;
+//    static int N;
+//    static int M;
+//
+//    public static void main(String[] args) {
+//        Scanner sc = new Scanner(System.in);
+//        N = sc.nextInt();
+//        M = sc.nextInt();
+//        arr = new int[M];
+//        check = new boolean[N+1];
+//        logic(0);
+//        System.out.println(sb);
+//    }
+//    public static void logic(int m) {
+//        if (m == M) {
+//            for(int i : arr) {
+//                sb.append(i).append(" ");
+//            }
+//            sb.append("\n");
+//            return;
+//        }
+//        for (int i = 1; i <= N; i++) {
+//            if(!check[i]){
+//                arr[m] = i;
+//                check[i]= true;
+//                logic(m+1);
+//                check[i] = false;
+//            }
+//        }
+//    }
 /* 수 이어 쓰기 1 */
 //    public static void main(String[] args) {
 //        Scanner sc = new Scanner(System.in);
