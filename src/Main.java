@@ -1,36 +1,92 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.StringTokenizer;
 
 public class Main {
-    static StringBuilder sb = new StringBuilder();
-    static int[] arr;
-    static int N;
-    static int M;
+    static ArrayList<ArrayList<Integer>> arr ;
     public static void main(String[] args) throws IOException {
         BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st = new StringTokenizer(bf.readLine());
-        N =Integer.parseInt(st.nextToken());
-        M =Integer.parseInt(st.nextToken());
-        arr = new int[M];
-        logic(0);
-        System.out.println(sb);
+        int n = Integer.parseInt(st.nextToken());
+        m = Integer.parseInt(st.nextToken());
+        arr = new ArrayList<>();
+        for(int i=0;i<n;i++) {
+            arr.add(new ArrayList<Integer>());
+        }
+        for (int i = 0; i < m; i++) {
+            st = new StringTokenizer(bf.readLine());
+            int a = Integer.parseInt(st.nextToken());
+            int b = Integer.parseInt(st.nextToken());
+            arr.get(a).add(b);
+            arr.get(b).add(a);
+        }
+        check = new boolean[n];
+        for(int i=0;i<n;i++) {
+            logic(i,0);
+        }
+        System.out.println(0);
     }
-    public static void logic( int m) {
-        if (m == M) {
-            for(int i : arr) {
-                sb.append(i).append(" ");
+
+    static int m;
+    static boolean[] check;
+
+    public static void logic(int friend,int depth) {
+        if (depth == 4) {
+            System.out.print(1);
+            System.exit(0);
+        }
+        check[friend] = true;
+        for( int i : arr.get(friend)) {
+            if(!check[i]) {
+                logic(i,depth+1);
             }
-            sb.append("\n");
-            return;
         }
-        for (int i = 1; i <= N; i++) {
-            arr[m] = i;
-            logic(m+1);
-        }
+        check[friend] = false;
     }
 }
+/* ABCDE */
+//static ArrayList<ArrayList<Integer>> arr ;
+//    public static void main(String[] args) throws IOException {
+//        BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
+//        StringTokenizer st = new StringTokenizer(bf.readLine());
+//        int n = Integer.parseInt(st.nextToken());
+//        m = Integer.parseInt(st.nextToken());
+//        arr = new ArrayList<>();
+//        for(int i=0;i<n;i++) {
+//            arr.add(new ArrayList<Integer>());
+//        }
+//        for (int i = 0; i < m; i++) {
+//            st = new StringTokenizer(bf.readLine());
+//            int a = Integer.parseInt(st.nextToken());
+//            int b = Integer.parseInt(st.nextToken());
+//            arr.get(a).add(b);
+//            arr.get(b).add(a);
+//        }
+//        check = new boolean[n];
+//        for(int i=0;i<n;i++) {
+//            logic(i,0);
+//        }
+//        System.out.println(0);
+//    }
+//
+//    static int m;
+//    static boolean[] check;
+//
+//    public static void logic(int friend,int depth) {
+//        if (depth == 4) {
+//            System.out.print(1);
+//            System.exit(0);
+//        }
+//        check[friend] = true;
+//        for( int i : arr.get(friend)) {
+//            if(!check[i]) {
+//                logic(i,depth+1);
+//            }
+//        }
+//        check[friend] = false;
+//    }
 /* N과 M(2) */
 //static StringBuilder sb = new StringBuilder();
 //    static int[] arr;
