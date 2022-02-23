@@ -1,51 +1,118 @@
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.StringTokenizer;
+import java.util.*;
 
 public class Main {
-    static ArrayList<ArrayList<Integer>> arr ;
-    public static void main(String[] args) throws IOException {
-        BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
-        StringTokenizer st = new StringTokenizer(bf.readLine());
-        int n = Integer.parseInt(st.nextToken());
-        m = Integer.parseInt(st.nextToken());
-        arr = new ArrayList<>();
-        for(int i=0;i<n;i++) {
-            arr.add(new ArrayList<Integer>());
+    static ArrayList<ArrayList<Integer>> arr = new ArrayList<>();
+    static StringBuilder sb = new StringBuilder();
+    static boolean Check[];
+    static int n;
+    static int m;
+    static int v;
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        n = sc.nextInt();
+        m = sc.nextInt();
+        v = sc.nextInt();
+        for (int i = 0; i <= n; i++) {
+            arr.add(new ArrayList<>());
         }
         for (int i = 0; i < m; i++) {
-            st = new StringTokenizer(bf.readLine());
-            int a = Integer.parseInt(st.nextToken());
-            int b = Integer.parseInt(st.nextToken());
-            arr.get(a).add(b);
-            arr.get(b).add(a);
+            int f = sc.nextInt();
+            int s = sc.nextInt();
+            arr.get(f).add(s);
+            arr.get(s).add(f);
         }
-        check = new boolean[n];
-        for(int i=0;i<n;i++) {
-            logic(i,0);
+        for(int i =0;i<=n;i++) {
+            Collections.sort(arr.get(i));
         }
-        System.out.println(0);
+        Check = new boolean[n+1];
+        DFS(v);
+        sb.append('\n');
+        Arrays.fill(Check,false);
+        BFS(v);
+        System.out.print(sb);
     }
-
-    static int m;
-    static boolean[] check;
-
-    public static void logic(int friend,int depth) {
-        if (depth == 4) {
-            System.out.print(1);
-            System.exit(0);
-        }
-        check[friend] = true;
-        for( int i : arr.get(friend)) {
-            if(!check[i]) {
-                logic(i,depth+1);
+    static public void DFS(int v) {
+        Check[v]=true;
+        sb.append(v).append(" ");
+        for(int i : arr.get(v)){
+            if(!Check[i]){
+                DFS(i);
             }
         }
-        check[friend] = false;
+    }
+    static public void BFS(int v) {
+        Queue<Integer> q = new LinkedList<>();
+        q.offer(v);
+        Check[v]= true;
+        sb.append(v).append(" ");
+        while(!q.isEmpty()) {
+            int num = q.poll();
+            for(int i: arr.get(num)){
+                if(!Check[i]){
+                    sb.append(i).append(" ");
+                    q.offer(i);
+                    Check[i]= true;
+                }
+            }
+        }
     }
 }
+/* DFS와 BFS*/
+//static ArrayList<ArrayList<Integer>> arr = new ArrayList<>();
+//    static StringBuilder sb = new StringBuilder();
+//    static boolean Check[];
+//    static int n;
+//    static int m;
+//    static int v;
+//    public static void main(String[] args) {
+//        Scanner sc = new Scanner(System.in);
+//        n = sc.nextInt();
+//        m = sc.nextInt();
+//        v = sc.nextInt();
+//        for (int i = 0; i <= n; i++) {
+//            arr.add(new ArrayList<>());
+//        }
+//        for (int i = 0; i < m; i++) {
+//            int f = sc.nextInt();
+//            int s = sc.nextInt();
+//            arr.get(f).add(s);
+//            arr.get(s).add(f);
+//        }
+//        for(int i =0;i<=n;i++) {
+//            Collections.sort(arr.get(i));
+//        }
+//        Check = new boolean[n+1];
+//        DFS(v);
+//        sb.append('\n');
+//        Arrays.fill(Check,false);
+//        BFS(v);
+//        System.out.print(sb);
+//    }
+//    static public void DFS(int v) {
+//        Check[v]=true;
+//        sb.append(v).append(" ");
+//        for(int i : arr.get(v)){
+//            if(!Check[i]){
+//                DFS(i);
+//            }
+//        }
+//    }
+//    static public void BFS(int v) {
+//        Queue<Integer> q = new LinkedList<>();
+//        q.offer(v);
+//        Check[v]= true;
+//        sb.append(v).append(" ");
+//        while(!q.isEmpty()) {
+//            int num = q.poll();
+//            for(int i: arr.get(num)){
+//                if(!Check[i]){
+//                    sb.append(i).append(" ");
+//                    q.offer(i);
+//                    Check[i]= true;
+//                }
+//            }
+//        }
+//    }
 /* ABCDE */
 //static ArrayList<ArrayList<Integer>> arr ;
 //    public static void main(String[] args) throws IOException {
