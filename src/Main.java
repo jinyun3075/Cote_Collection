@@ -1,62 +1,78 @@
 import java.util.*;
 
 public class Main {
-    static ArrayList<ArrayList<Integer>> arr = new ArrayList<>();
-    static StringBuilder sb = new StringBuilder();
-    static boolean Check[];
-    static int n;
-    static int m;
-    static int v;
-    public static void main(String[] args) {
+    public static void main (String[] args) {
         Scanner sc = new Scanner(System.in);
-        n = sc.nextInt();
-        m = sc.nextInt();
-        v = sc.nextInt();
-        for (int i = 0; i <= n; i++) {
+        int n = sc.nextInt();
+        int m = sc.nextInt();
+        boolean check[] = new boolean[n+1];
+        int result = 0;
+        ArrayList<ArrayList<Integer>> arr = new ArrayList<>();
+        for(int i=0;i<=n;i++) {
             arr.add(new ArrayList<>());
         }
-        for (int i = 0; i < m; i++) {
+        for(int i=0;i<m;i++) {
             int f = sc.nextInt();
             int s = sc.nextInt();
             arr.get(f).add(s);
             arr.get(s).add(f);
         }
-        for(int i =0;i<=n;i++) {
-            Collections.sort(arr.get(i));
-        }
-        Check = new boolean[n+1];
-        DFS(v);
-        sb.append('\n');
-        Arrays.fill(Check,false);
-        BFS(v);
-        System.out.print(sb);
-    }
-    static public void DFS(int v) {
-        Check[v]=true;
-        sb.append(v).append(" ");
-        for(int i : arr.get(v)){
-            if(!Check[i]){
-                DFS(i);
-            }
-        }
-    }
-    static public void BFS(int v) {
-        Queue<Integer> q = new LinkedList<>();
-        q.offer(v);
-        Check[v]= true;
-        sb.append(v).append(" ");
-        while(!q.isEmpty()) {
-            int num = q.poll();
-            for(int i: arr.get(num)){
-                if(!Check[i]){
-                    sb.append(i).append(" ");
-                    q.offer(i);
-                    Check[i]= true;
+        for(int i = 1 ;i<=n;i++) {
+            if(!check[i]) {
+                result++;
+                Queue<Integer> q = new LinkedList<>();
+                check[i]=true;
+                q.offer(i);
+                while(!q.isEmpty()) {
+                    int num = q.poll();
+                    for(int j: arr.get(num)) {
+                        if(!check[j]){
+                            check[j] = true;
+                            q.offer(j);
+                        }
+                    }
                 }
             }
         }
+        System.out.println(result);
     }
 }
+/* 연결 요소의 개수*/
+//    public static void main (String[] args) {
+//        Scanner sc = new Scanner(System.in);
+//        int n = sc.nextInt();
+//        int m = sc.nextInt();
+//        boolean check[] = new boolean[n+1];
+//        int result = 0;
+//        ArrayList<ArrayList<Integer>> arr = new ArrayList<>();
+//        for(int i=0;i<=n;i++) {
+//            arr.add(new ArrayList<>());
+//        }
+//        for(int i=0;i<m;i++) {
+//            int f = sc.nextInt();
+//            int s = sc.nextInt();
+//            arr.get(f).add(s);
+//            arr.get(s).add(f);
+//        }
+//        for(int i = 1 ;i<=n;i++) {
+//            if(!check[i]) {
+//                result++;
+//                Queue<Integer> q = new LinkedList<>();
+//                check[i]=true;
+//                q.offer(i);
+//                while(!q.isEmpty()) {
+//                    int num = q.poll();
+//                    for(int j: arr.get(num)) {
+//                        if(!check[j]){
+//                            check[j] = true;
+//                            q.offer(j);
+//                        }
+//                    }
+//                }
+//            }
+//        }
+//        System.out.println(result);
+//    }
 /* DFS와 BFS*/
 //static ArrayList<ArrayList<Integer>> arr = new ArrayList<>();
 //    static StringBuilder sb = new StringBuilder();
