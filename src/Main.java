@@ -1,40 +1,53 @@
 import java.util.*;
 
 public class Main {
-    public static void main (String[] args) {
+    public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        int n = sc.nextInt();
-        int m = sc.nextInt();
-        boolean check[] = new boolean[n+1];
-        int result = 0;
-        ArrayList<ArrayList<Integer>> arr = new ArrayList<>();
-        for(int i=0;i<=n;i++) {
-            arr.add(new ArrayList<>());
+        StringBuilder sb = new StringBuilder();
+        int k = sc.nextInt();
+        while (k-- > 0) {
+            v = sc.nextInt();
+            int e = sc.nextInt();
+            check = new int[v + 1];
+            arr = new ArrayList<>();
+            for (int i = 0; i <= v; i++) {
+                arr.add(new ArrayList<>());
+            }
+            for (int i = 0; i < e; i++) {
+                int one = sc.nextInt();
+                int two = sc.nextInt();
+                arr.get(one).add(two);
+                arr.get(two).add(one);
+            }
+            sb.append(logic()).append("\n");
         }
-        for(int i=0;i<m;i++) {
-            int f = sc.nextInt();
-            int s = sc.nextInt();
-            arr.get(f).add(s);
-            arr.get(s).add(f);
-        }
-        for(int i = 1 ;i<=n;i++) {
-            if(!check[i]) {
-                result++;
-                Queue<Integer> q = new LinkedList<>();
-                check[i]=true;
+        System.out.println(sb);
+    }
+
+    static int v;
+    static ArrayList<ArrayList<Integer>> arr;
+    static int[] check;
+    static String logic() {
+        Queue<Integer> q = new LinkedList<>();
+        for (int i = 1; i <= v; i++) {
+            if (check[i] == 0) {
                 q.offer(i);
-                while(!q.isEmpty()) {
-                    int num = q.poll();
-                    for(int j: arr.get(num)) {
-                        if(!check[j]){
-                            check[j] = true;
-                            q.offer(j);
-                        }
+                check[i] = 1;
+            }
+            while (!q.isEmpty()) {
+                int num = q.poll();
+                for (int j : arr.get(num)) {
+                    if (check[j] == check[num]) {
+                        return "NO";
+                    }
+                    if (check[j] == 0) {
+                        check[j] = 3-check[num];
+                        q.offer(j);
                     }
                 }
             }
         }
-        System.out.println(result);
+        return "YES";
     }
 }
 /* 연결 요소의 개수*/
