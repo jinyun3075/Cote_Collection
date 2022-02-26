@@ -1,53 +1,55 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.*;
 
 public class Main {
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        StringBuilder sb = new StringBuilder();
-        int k = sc.nextInt();
-        while (k-- > 0) {
-            v = sc.nextInt();
-            int e = sc.nextInt();
-            check = new int[v + 1];
-            arr = new ArrayList<>();
-            for (int i = 0; i <= v; i++) {
-                arr.add(new ArrayList<>());
-            }
-            for (int i = 0; i < e; i++) {
-                int one = sc.nextInt();
-                int two = sc.nextInt();
-                arr.get(one).add(two);
-                arr.get(two).add(one);
-            }
-            sb.append(logic()).append("\n");
-        }
-        System.out.println(sb);
-    }
-
-    static int v;
-    static ArrayList<ArrayList<Integer>> arr;
-    static int[] check;
-    static String logic() {
-        Queue<Integer> q = new LinkedList<>();
-        for (int i = 1; i <= v; i++) {
-            if (check[i] == 0) {
-                q.offer(i);
-                check[i] = 1;
-            }
-            while (!q.isEmpty()) {
-                int num = q.poll();
-                for (int j : arr.get(num)) {
-                    if (check[j] == check[num]) {
-                        return "NO";
-                    }
-                    if (check[j] == 0) {
-                        check[j] = 3-check[num];
-                        q.offer(j);
-                    }
+    static BufferedReader sc = new BufferedReader(new InputStreamReader(System.in));
+    public static void main(String[] args) throws IOException {
+        ArrayList<Integer> sb = new ArrayList<>();
+        Main logic = new Main();
+        int N = Integer.parseInt(sc.readLine());
+        logic.setMap(N);
+        int count=0;
+        for(int i=0;i<N;i++){
+            for(int j=0;j<N;j++){
+                if(logic.map[i][j]==1) {
+                    count++;
+                    logic.home=0;
+                    logic.dfs(i,j,N);
+                    sb.add(logic.home);
                 }
             }
         }
-        return "YES";
+        Collections.sort(sb);
+        System.out.println(count);
+        sb.forEach(i -> {
+            System.out.println(i);
+        });
+    }
+    int home;
+    int[][] map;
+    int[] move = {1,-1};
+    void setMap(int n) throws IOException{
+        map = new int[n][n];
+        for(int i=0;i<n;i++) {
+            String input = sc.readLine();
+            for(int j=0;j<n;j++) {
+                map[i][j] = input.charAt(j)-'0';
+            }
+        }
+    }
+    void dfs(int x, int y, int n) {
+        map[x][y]=0;
+        home++;
+        for(int i=0;i<2;i++) {
+            if(move[i]+x<n&&move[i]+x>=0&&map[move[i]+x][y]==1) {
+                dfs(move[i]+x,y,n);
+            }
+            if(move[i]+y<n&&move[i]+y>=0&&map[x][move[i]+y]==1) {
+                dfs(x,move[i]+y,n);
+            }
+        }
     }
 }
 /* 연결 요소의 개수*/
