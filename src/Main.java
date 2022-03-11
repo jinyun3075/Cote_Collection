@@ -1,57 +1,80 @@
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.awt.*;
 import java.util.*;
+import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class Main {
-    static BufferedReader sc = new BufferedReader(new InputStreamReader(System.in));
-    public static void main(String[] args) throws IOException {
-        ArrayList<Integer> sb = new ArrayList<>();
-        Main logic = new Main();
-        int N = Integer.parseInt(sc.readLine());
-        logic.setMap(N);
-        int count=0;
-        for(int i=0;i<N;i++){
-            for(int j=0;j<N;j++){
-                if(logic.map[i][j]==1) {
-                    count++;
-                    logic.home=0;
-                    logic.dfs(i,j,N);
-                    sb.add(logic.home);
-                }
-            }
-        }
-        Collections.sort(sb);
-        System.out.println(count);
-        sb.forEach(i -> {
-            System.out.println(i);
-        });
-    }
-    int home;
-    int[][] map;
-    int[] move = {1,-1};
-    void setMap(int n) throws IOException{
-        map = new int[n][n];
-        for(int i=0;i<n;i++) {
-            String input = sc.readLine();
-            for(int j=0;j<n;j++) {
-                map[i][j] = input.charAt(j)-'0';
-            }
-        }
-    }
-    void dfs(int x, int y, int n) {
-        map[x][y]=0;
-        home++;
-        for(int i=0;i<2;i++) {
-            if(move[i]+x<n&&move[i]+x>=0&&map[move[i]+x][y]==1) {
-                dfs(move[i]+x,y,n);
-            }
-            if(move[i]+y<n&&move[i]+y>=0&&map[x][move[i]+y]==1) {
-                dfs(x,move[i]+y,n);
-            }
-        }
-    }
+   public static void main(String[] args) {
+       Map<String,Integer> m = new HashMap<>();
+       PriorityQueue<Point> pr = new PriorityQueue<>((a,b)->a.x-b.x);
+       m.put("1539785904",1);
+       m.put("11",2);
+       m.put("11",3);
+//       int x= 0;
+//       for(Map.Entry<String,Integer> b : m.entrySet()){
+//           System.out.println("2번 --- "+x);
+//       }
+       List<Point> po = new ArrayList<>();
+       po.add(new Point(1,5));
+       po.add(new Point(2,4));
+       po.add(new Point(3,3));
+       po.add(new Point(4,2));
+       po.add(new Point(5,1));
+       po.sort((a,b)->b.y-a.y);
+       Collections.sort(po,(a,b)->b.y-a.y);
+       for (Point point : po) {
+           System.out.println(point.x);
+       }
+   }
 }
+/* 단지 번호 붙이기 */
+//    static BufferedReader sc = new BufferedReader(new InputStreamReader(System.in));
+//    public static void main(String[] args) throws IOException {
+//        ArrayList<Integer> sb = new ArrayList<>();
+//        Main logic = new Main();
+//        int N = Integer.parseInt(sc.readLine());
+//        logic.setMap(N);
+//        int count=0;
+//        for(int i=0;i<N;i++){
+//            for(int j=0;j<N;j++){
+//                if(logic.map[i][j]==1) {
+//                    count++;
+//                    logic.home=0;
+//                    logic.dfs(i,j,N);
+//                    sb.add(logic.home);
+//                }
+//            }
+//        }
+//        Collections.sort(sb);
+//        System.out.println(count);
+//        sb.forEach(i -> {
+//            System.out.println(i);
+//        });
+//    }
+//    int home;
+//    int[][] map;
+//    int[] move = {1,-1};
+//    void setMap(int n) throws IOException{
+//        map = new int[n][n];
+//        for(int i=0;i<n;i++) {
+//            String input = sc.readLine();
+//            for(int j=0;j<n;j++) {
+//                map[i][j] = input.charAt(j)-'0';
+//            }
+//        }
+//    }
+//    void dfs(int x, int y, int n) {
+//        map[x][y]=0;
+//        home++;
+//        for(int i=0;i<2;i++) {
+//            if(move[i]+x<n&&move[i]+x>=0&&map[move[i]+x][y]==1) {
+//                dfs(move[i]+x,y,n);
+//            }
+//            if(move[i]+y<n&&move[i]+y>=0&&map[x][move[i]+y]==1) {
+//                dfs(x,move[i]+y,n);
+//            }
+//        }
+//    }
 /* 연결 요소의 개수*/
 //    public static void main (String[] args) {
 //        Scanner sc = new Scanner(System.in);
