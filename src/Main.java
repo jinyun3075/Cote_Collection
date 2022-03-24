@@ -5,27 +5,17 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 public class Main {
    public static void main(String[] args) {
-       Map<String,Integer> m = new HashMap<>();
-       PriorityQueue<Point> pr = new PriorityQueue<>((a,b)->a.x-b.x);
-       m.put("1539785904",1);
-       m.put("11",2);
-       m.put("11",3);
-//       int x= 0;
-//       for(Map.Entry<String,Integer> b : m.entrySet()){
-//           System.out.println("2번 --- "+x);
-//       }
-       List<Point> po = new ArrayList<>();
-       po.add(new Point(1,5));
-       po.add(new Point(2,4));
-       po.add(new Point(3,3));
-       po.add(new Point(4,2));
-       po.add(new Point(5,1));
-       po.sort((a,b)->b.y-a.y);
-       Collections.sort(po,(a,b)->b.y-a.y);
-       for (Point point : po) {
-           System.out.println(point.x);
-       }
-   }
+       Set<Integer> s = new HashSet<>();
+       s.add(1);
+       s.add(1);
+       s.add(1);
+       int a =2;
+       int b = 3;
+
+       System.out.println(Math.abs(a-b));
+
+    }
+
 }
 /* 단지 번호 붙이기 */
 //    static BufferedReader sc = new BufferedReader(new InputStreamReader(System.in));
