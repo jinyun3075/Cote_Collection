@@ -1,21 +1,52 @@
-import java.awt.*;
 import java.util.*;
-import java.util.List;
-import java.util.concurrent.atomic.AtomicInteger;
 
 public class Main {
-   public static void main(String[] args) {
-       Set<Integer> s = new HashSet<>();
-       s.add(1);
-       s.add(1);
-       s.add(1);
-       int a =2;
-       int b = 3;
+    static char[][] arr;
+    static int N;
 
-       System.out.println(Math.abs(a-b));
-
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        N = sc.nextInt();
+        arr = new char[N][N];
+        logic(0,0,N,true);
+        StringBuilder sb = new StringBuilder();
+        for(int i=0;i<N;i++) {
+            for(int j=0;j<N;j++) {
+                sb.append(arr[i][j]);
+            }
+            sb.append("\n");
+        }
+        System.out.println(sb);
     }
 
+    public static void logic(int x, int y, int size, boolean star) {
+        if (!star) {
+            for (int i = x; i < x + size; i++) {
+                for (int j = y; j < y + size; j++) {
+                    arr[i][j] = ' ';
+                }
+            }
+            return;
+        }
+
+        if (size == 1) {
+            arr[x][y] = '*';
+            return;
+        }
+
+        int div = size / 3;
+        int count = 1;
+        for (int i = x; i < x + size; i += div) {
+            for (int j = y; j < y + size; j += div) {
+                if (count++ == 5) {
+                    logic(i, j, div, false);
+                } else {
+                    logic(i, j, div, true);
+                }
+            }
+        }
+
+    }
 }
 /* 단지 번호 붙이기 */
 //    static BufferedReader sc = new BufferedReader(new InputStreamReader(System.in));
