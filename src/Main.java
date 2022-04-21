@@ -1,29 +1,35 @@
 import java.util.*;
 
 public class Main {
+    static Integer[] arr;
+    static int result;
+    static int N;
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        String n = sc.next();
-        logic(n, 0);
-    }
+        N = sc.nextInt();
+        int K = sc.nextInt();
+        arr = new Integer[K];
+        for(int i=0;i<K;i++) {
+            arr[i] = sc.nextInt();
+        }
+        Arrays.sort(arr,Collections.reverseOrder());
+        logic(0);
+        System.out.println(result);
 
-    public static void logic(String str, int count) {
-        if (str.length() == 1) {
-            if (Integer.parseInt(str) % 3 == 0) {
-                System.out.println(count);
-                System.out.println("YES");
-                return;
-            }
-            System.out.println(count);
-            System.out.println("NO");
+    }
+    static void logic(int num) {
+        if(num > N) {
             return;
         }
 
-        long result = 0;
-        for (int i = 0; i < str.length(); i++) {
-            result += Integer.parseInt(String.valueOf(str.charAt(i)));
+        if(result<num) {
+            result = num;
         }
-        logic(String.valueOf(result), count + 1);
+
+        for(int v : arr) {
+            logic(num*10+v);
+        }
+
     }
 }
 /* 단지 번호 붙이기 */
