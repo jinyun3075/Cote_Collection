@@ -1,51 +1,28 @@
 import java.util.*;
 
 public class Main {
-    static char[][] arr;
-    static int N;
+    static StringBuilder sb = new StringBuilder();
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        N = sc.nextInt();
-        arr = new char[N][N];
-        logic(0,0,N,true);
-        StringBuilder sb = new StringBuilder();
-        for(int i=0;i<N;i++) {
-            for(int j=0;j<N;j++) {
-                sb.append(arr[i][j]);
-            }
-            sb.append("\n");
-        }
+        int n = sc.nextInt();
+        sb.append("어느 한 컴퓨터공학과 학생이 유명한 교수님을 찾아가 물었다.\n");
+        logic(n, "");
         System.out.println(sb);
     }
 
-    public static void logic(int x, int y, int size, boolean star) {
-        if (!star) {
-            for (int i = x; i < x + size; i++) {
-                for (int j = y; j < y + size; j++) {
-                    arr[i][j] = ' ';
-                }
-            }
+    static void logic(int n, String d) {
+        sb.append(d + "\"재귀함수가 뭔가요?\"\n");
+        if (n == 0) {
+            sb.append(d + "\"재귀함수는 자기 자신을 호출하는 함수라네\"\n");
+            sb.append(d + "라고 답변하였지.\n");
             return;
         }
-
-        if (size == 1) {
-            arr[x][y] = '*';
-            return;
-        }
-
-        int div = size / 3;
-        int count = 1;
-        for (int i = x; i < x + size; i += div) {
-            for (int j = y; j < y + size; j += div) {
-                if (count++ == 5) {
-                    logic(i, j, div, false);
-                } else {
-                    logic(i, j, div, true);
-                }
-            }
-        }
-
+        sb.append(d + "\"잘 들어보게. 옛날옛날 한 산 꼭대기에 이세상 모든 지식을 통달한 선인이 있었어.\n" +
+                d + "마을 사람들은 모두 그 선인에게 수많은 질문을 했고, 모두 지혜롭게 대답해 주었지.\n" +
+                d + "그의 답은 대부분 옳았다고 하네. 그런데 어느 날, 그 선인에게 한 선비가 찾아와서 물었어.\"\n");
+        logic(n - 1, d + "____");
+        sb.append(d + "라고 답변하였지.\n");
     }
 }
 /* 단지 번호 붙이기 */
