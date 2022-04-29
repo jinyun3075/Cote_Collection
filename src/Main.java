@@ -1,35 +1,52 @@
 import java.util.*;
 
 public class Main {
-    static int[] dp;
-
+    static Map<String,ArrayList<String>> map;
+    static StringBuilder sb = new StringBuilder();
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        int H = sc.nextInt();
-        int Y = sc.nextInt();
-        final double FIVE_DIV_ARGS = 2.857142857142857;
-        final double THREE_DIV_ARGS = 5.0;
-        final double ONE_DIV_ARGS = 20.0;
-
-        dp = new int[Y + 1];
-        dp[0] = H;
-        dp[1] = dp[0] + (int) (H / ONE_DIV_ARGS);
-        for (int i = 2; i <= Y; i++) {
-            if (i > 4) {
-                dp[i] = (int) Math.max(dp[i], dp[i - 5] + (dp[i - 5] / FIVE_DIV_ARGS));
-            }
-            if (i > 2) {
-                dp[i] = (int) Math.max(dp[i], dp[i - 3] + (dp[i - 3] / THREE_DIV_ARGS));
-            }
-            dp[i] = (int) Math.max(dp[i], dp[i - 1] + (dp[i - 1] / ONE_DIV_ARGS));
+        map = new HashMap<>();
+        int n = sc.nextInt();
+        sc.nextLine();
+        for(int i = 0 ; i< n ;i ++) {
+            String[] input = sc.nextLine().split(" ");
+            map.put(input[0],new ArrayList<>());
+            map.get(input[0]).add(input[1]);
+            map.get(input[0]).add(input[2]);
         }
-        System.out.println(dp[Y]);
+        preorder("A");
+        sb.append("\n");
+        inorder("A");
+        sb.append("\n");
+        postorder("A");
+        System.out.println(sb);
     }
 
-    public static void logic(int Y, int money) {
-
+    public static void preorder (String root) {
+        if(root.equals(".")){
+            return;
+        }
+        sb.append(root);
+        preorder(map.get(root).get(0));
+        preorder(map.get(root).get(1));
     }
 
+    public static void inorder (String root) {
+        if(root.equals(".")){
+            return;
+        }
+        inorder(map.get(root).get(0));
+        sb.append(root);
+        inorder(map.get(root).get(1));
+    }
+    public static void postorder (String root) {
+        if(root.equals(".")){
+            return;
+        }
+        postorder(map.get(root).get(0));
+        postorder(map.get(root).get(1));
+        sb.append(root);
+    }
 }
 /* 단지 번호 붙이기 */
 //    static BufferedReader sc = new BufferedReader(new InputStreamReader(System.in));
