@@ -1,29 +1,66 @@
 package recursion;
+
 import java.util.*;
 
 public class Bac19947 {
-    static int[] dp;
+    final double FIVE_DIV_ARGS = 1.35;
+    final double THREE_DIV_ARGS = 1.2;
+    final double ONE_DIV_ARGS = 1.05;
+    int[] dp;
+
+    Bac19947(int H, int Y) {
+        init(H, Y);
+    }
+
+    private void init(int H, int Y) {
+        dp = new int[Y + 1];
+        dp[0] = H;
+        logic(Y);
+    }
+
+    public int logic(int year) {
+        if (endLogic(year)) {
+            return 0;
+        }
+        if (checkDP(year)) {
+            calculator(year);
+        }
+        return dp[year];
+    }
+
+    public int getValue() {
+        return dp[dp.length - 1];
+    }
+
+    private boolean endLogic(int year) {
+        if (year < 0) {
+            return true;
+        }
+        return false;
+    }
+
+    private boolean checkDP(int year) {
+        if (dp[year] == 0) {
+            return true;
+        }
+        return false;
+    }
+
+    private void calculator(int year) {
+        if (year > 4) {
+            dp[year] = (int) Math.max(dp[year], logic(year - 5) * FIVE_DIV_ARGS);
+        }
+        if (year > 2) {
+            dp[year] = (int) Math.max(dp[year], logic(year - 3) * THREE_DIV_ARGS);
+        }
+        dp[year] = (int) Math.max(dp[year], logic(year - 1) * ONE_DIV_ARGS);
+    }
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         int H = sc.nextInt();
         int Y = sc.nextInt();
-        final double FIVE_DIV_ARGS = 2.857142857142857;
-        final double THREE_DIV_ARGS = 5.0;
-        final double ONE_DIV_ARGS = 20.0;
-
-        dp = new int[Y + 1];
-        dp[0] = H;
-        dp[1] = dp[0] + (int) (H / ONE_DIV_ARGS);
-        for (int i = 2; i <= Y; i++) {
-            if (i > 4) {
-                dp[i] = (int) Math.max(dp[i], dp[i - 5] + (dp[i - 5] / FIVE_DIV_ARGS));
-            }
-            if (i > 2) {
-                dp[i] = (int) Math.max(dp[i], dp[i - 3] + (dp[i - 3] / THREE_DIV_ARGS));
-            }
-            dp[i] = (int) Math.max(dp[i], dp[i - 1] + (dp[i - 1] / ONE_DIV_ARGS));
-        }
-        System.out.println(dp[Y]);
+        Bac19947 solution = new Bac19947(H, Y);
+        System.out.println(solution.getValue());
     }
 }
