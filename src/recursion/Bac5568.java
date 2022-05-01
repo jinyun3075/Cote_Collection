@@ -1,6 +1,9 @@
-import java.util.*;
+package recursion;
 
-public class Main {
+import java.util.HashSet;
+import java.util.Scanner;
+
+public class Bac5568 {
     static String[] card;
     static boolean[] checkCard;
     static HashSet<String> result = new HashSet<>();
