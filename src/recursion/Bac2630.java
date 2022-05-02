@@ -1,8 +1,10 @@
+package recursion;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-public class Main {
+public class Bac2630 {
     static int[][] map;
     static int white;
     static int blue;
@@ -41,9 +43,9 @@ public class Main {
     }
     public static boolean check(int col, int row, int size) {
         int base = map[col][row];
-        for(int i=col;i<col+size;i++) {
-            for(int j = row ; j<row+size;j++) {
-                if(base!=map[i][j]) {
+        for (int i = col; i < col + size; i++) {
+            for (int j = row; j < row + size; j++) {
+                if (base != map[i][j]) {
                     return false;
                 }
             }
