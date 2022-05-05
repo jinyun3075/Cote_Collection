@@ -1,8 +1,9 @@
+package Sorfteer;
+
 import java.util.*;
-import java.io.*;
 
 
-public class Main
+public class Steal
 {
     public static void main(String args[])
     {
