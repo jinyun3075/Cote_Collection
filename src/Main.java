@@ -7,14 +7,14 @@ public class Main
     public static void main(String args[])
     {
         Scanner sc = new Scanner(System.in);
-        int result =0;
-        int w = sc.nextInt();
-        int n = sc.nextInt();
-        PriorityQueue<Item> pr = new PriorityQueue<>((o1,o2)->o2.p-o1.p);
-        for(int i=0;i<n;i++) {
-            pr.offer(new Item(sc.nextInt(),sc.nextInt()));
+        long result =0;
+        long w = sc.nextLong();
+        long n = sc.nextLong();
+        PriorityQueue<Item> pr = new PriorityQueue<>((o1,o2)-> (int) (o2.p-o1.p));
+        for(long i=0;i<n;i++) {
+            pr.offer(new Item(sc.nextLong(),sc.nextLong()));
         }
-        while(!pr.isEmpty()){
+        while(!pr.isEmpty()&&w!=0){
             Item item =pr.poll();
             if(w>=item.m) {
                 w-=item.m;
@@ -27,9 +27,9 @@ public class Main
     }
 }
 class Item {
-    int m;
-    int p;
-    Item(int m, int p){
+    long m;
+    long p;
+    Item(long m, long p){
         this.m = m;
         this.p = p;
     }

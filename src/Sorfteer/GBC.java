@@ -2,7 +2,7 @@ package Sorfteer;
 
 import java.util.*;
 
-
+// 문제 주소 https://softeer.ai/practice/info.do?eventIdx=1&psProblemId=584
 public class GBC
 {
     public static void main(String args[])
