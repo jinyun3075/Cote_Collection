@@ -1,40 +1,41 @@
 import java.util.*;
-import java.io.*;
 
-
-public class Main
-{
+class Main {
+    static List<String> resultList = new ArrayList<>();
+    static int[] input;
     static int N;
-    static int M;
-    static int[] inputArr;
-    static int[] checkArr;
-    public static void main(String args[])
-    {
-       Scanner sc = new Scanner(System.in);
-       N = sc.nextInt();
-       M = sc.nextInt();
-       inputArr = new int[N];
-       checkArr = new int[M];
-       for(int i=0;i<N;i++) {
-           inputArr[i] = sc.nextInt();
-       }
-       Arrays.sort(inputArr);
-       logic(0,0);
-       System.out.println(sb);
+    static boolean[] visit;
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        N = sc.nextInt();
+        int M = sc.nextInt();
+        input = new int[N];
+        visit = new boolean[N];
+        for (int i = 0; i < N; i++) {
+            input[i] = sc.nextInt();
+        }
+        Arrays.sort(input);
+        dfs(M, "", 0);
+
+        for(String print : resultList){
+            System.out.println(print.trim());
+        }
     }
-    static StringBuilder sb = new StringBuilder();
-    public static void logic(int checkIdx,int idx) {
-        if(checkIdx==M) {
-            for(int i =0 ;i<checkIdx;i++) {
-                sb.append(checkArr[i]+" ");
+
+    public static void dfs(int count, String result,int idx) {
+        if (count == 0) {
+            if(!resultList.contains(result)){
+                resultList.add(result);
             }
-            sb.append("\n");
             return;
         }
 
-        for(int i = idx;i< inputArr.length;i++) {
-            checkArr[checkIdx]=inputArr[i];
-            logic(checkIdx+1,i);
+        for (int i = idx; i < N; i++) {
+            if(!visit[i]) {
+                visit[i] = true;
+                dfs(count-1,result+" "+input[i],i+1);
+                visit[i] = false;
+            }
         }
     }
 }
