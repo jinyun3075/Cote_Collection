@@ -1,9 +1,11 @@
+package bruteforce;
+
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Scanner;
 import java.util.Set;
 
-class Main {
+public class Bac15666 {
     static int N;
     static int[] arr;
     public static void main(String[] args) {
@@ -18,10 +20,10 @@ class Main {
         dfs(M,"",0);
         System.out.print(sb);
 
-  }
-  static Set<String> checkContain = new HashSet<>();
+    }
+    static Set<String> checkContain = new HashSet<>();
     static StringBuilder sb = new StringBuilder();
-  public static void dfs(int count, String result, int idx){
+    public static void dfs(int count, String result, int idx){
         if(count == 0) {
             if(!checkContain.contains(result)) {
                 checkContain.add(result);
@@ -32,5 +34,5 @@ class Main {
         for(int i =idx ;i<N;i++) {
             dfs(count-1,result+arr[i]+" ",i);
         }
-  }
+    }
 }
