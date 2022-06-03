@@ -1,28 +1,30 @@
+package bruteforce;
+
 import java.util.Scanner;
 
-class Main {
+public class Bac2529 {
     static boolean[] checkNum = new boolean[10];
     static int[] value;
     static String[] cal;
     static String max = "";
     static String min = "a";
     public static void main(String[] args) {
-       Scanner sc = new Scanner(System.in);
-       int k = sc.nextInt();
-       cal = new String[k];
-       value = new int[k+1];
-       for(int i=0;i<cal.length;i++) {
-           cal[i] = sc.next();
-       }
+        Scanner sc = new Scanner(System.in);
+        int k = sc.nextInt();
+        cal = new String[k];
+        value = new int[k+1];
+        for(int i=0;i<cal.length;i++) {
+            cal[i] = sc.next();
+        }
 
-       for(int i=0;i<10;i++) {
-           value[0] = i;
-           checkNum[i] = true;
-           logic(0,i,1);
-           checkNum[i] = false;
-       }
-       System.out.println(max);
-       System.out.println(min);
+        for(int i=0;i<10;i++) {
+            value[0] = i;
+            checkNum[i] = true;
+            logic(0,i,1);
+            checkNum[i] = false;
+        }
+        System.out.println(max);
+        System.out.println(min);
 
     }
     public static void logic(int k,int idx, int location) {
