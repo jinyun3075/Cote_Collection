@@ -1,6 +1,8 @@
+package Backtracking;
+
 import java.util.Scanner;
 
-class Main {
+public class Bac1182 {
     static int[] arr;
     static int S;
     static int result=0;
