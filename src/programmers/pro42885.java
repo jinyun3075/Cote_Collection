@@ -1,5 +1,6 @@
 package programmers;
 
+import java.util.Arrays;
 public class pro42885 {
     class Solution {
         public int solution(int[] people, int limit) {
