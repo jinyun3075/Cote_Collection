@@ -1,33 +1,77 @@
 import java.util.Scanner;
 
 class Main {
-    static int[] arr;
-    static int S;
-    static int result=0;
+    static int N;
+    static int M;
+    static int[][] map;
+    static boolean[][] direction;
+    static int max=0;
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        int N = sc.nextInt();
-        S = sc.nextInt();
-        arr = new int[N];
-        for(int i=0;i<arr.length;i++) {
-            arr[i] = sc.nextInt();
+        N = sc.nextInt();
+        M = sc.nextInt();
+
+        map = new int[N][M];
+        direction = new boolean[N][M];
+
+        for(int i=0;i<N;i++) {
+            String input = sc.next();
+            for(int j=0;j<M;j++) {
+                map[i][j] = input.charAt(j) - '0';
+            }
         }
 
-        for(int i = arr.length;i>0;i--) {
-            logic(i,0,0);
-        }
-        System.out.println(result);
+        dfs(0,0);
+        System.out.println(max);
     }
-    public static void logic(int depth, int sum, int idx) {
-        if(depth==0) {
-            if(S==sum) {
-                result++;
-            }
+
+    public static void dfs(int row, int cal) {
+        if(row>=N) {
+            logic();
+            return;
+        }
+        if(cal>=M) {
+            dfs(row+1,0);
             return;
         }
 
-        for(int i=idx;i<arr.length;i++) {
-            logic(depth-1,sum+arr[i],i+1);
+        direction[row][cal] = true;
+        dfs(row, cal+1);
+        direction[row][cal] = false;
+        dfs(row, cal+1);
+    }
+
+    public static void logic() {
+        int temp =0;
+        int result =0;
+
+        for(int i=0;i<N;i++) {
+            temp = 0;
+            for(int j=0;j<M;j++) {
+                if(direction[i][j]) {
+                    temp *= 10;
+                    temp += map[i][j];
+                } else {
+                    result += temp;
+                    temp = 0;
+                }
+            }
+            result += temp;
         }
+        for(int i=0;i<M;i++) {
+            temp = 0;
+            for(int j=0;j<N;j++) {
+                if(!direction[j][i]) {
+                    temp *= 10;
+                    temp += map[j][i];
+                }else {
+                    result += temp;
+                    temp = 0;
+                }
+            }
+            result += temp;
+        }
+
+        max = Math.max(max,result);
     }
 }
