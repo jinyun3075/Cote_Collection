@@ -1,10 +1,10 @@
-    import java.awt.*;
-    import java.math.BigInteger;
-    import java.util.LinkedList;
-    import java.util.Queue;
-    import java.util.Scanner;
+package Graph;
 
-class Main {
+import java.util.LinkedList;
+import java.util.Queue;
+import java.util.Scanner;
+
+public class Bac7576 {
     static int N;
     static int M;
     static int[][] board;
@@ -62,6 +62,7 @@ class Main {
             result =data.state;
         }
     }
+
 }
 class Data {
     int x;
