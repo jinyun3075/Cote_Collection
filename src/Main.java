@@ -17,16 +17,11 @@ class Main {
         int result1 =0;
         int result2 =0;
         for(int i=0;i<M;i++) {
-            int sold = arr[i];
+            int soldValue = arr[i];
             int count = Math.min(N,M);
             int price =0;
-            for(int j = i ;j<M;j++) {
-                if(count ==0 ) {
-                    break;
-                }
-                price += sold;
-                count--;
-            }
+            int sold = Math.min((M)-i,count);
+            price = soldValue * sold;
             if(result2<price) {
                 result1 = arr[i];
                 result2 = price;
