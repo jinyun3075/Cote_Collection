@@ -1,8 +1,11 @@
+package Graph;
+
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Scanner;
 
-class Main {
+public class Bac7562 {
+
     static int[][] map;
     static int answer = 0;
     static boolean[][] visit;
@@ -56,16 +59,15 @@ class Main {
             }
         }
     }
-}
+    static class Data {
+        int count;
+        int x;
+        int y;
 
-class Data {
-    int count;
-    int x;
-    int y;
-
-    Data(int x, int y, int count) {
-        this.x = x;
-        this.y = y;
-        this.count = count;
+        Data(int x, int y, int count) {
+            this.x = x;
+            this.y = y;
+            this.count = count;
+        }
     }
 }
