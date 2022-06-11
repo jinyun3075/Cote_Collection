@@ -62,15 +62,14 @@ public class Bac7576 {
             result =data.state;
         }
     }
-
-}
-class Data {
-    int x;
-    int y;
-    int state;
-    Data(int x,int y, int state) {
-        this.x = x;
-        this.y = y;
-        this.state=state;
+    static class Data {
+        int x;
+        int y;
+        int state;
+        Data(int x,int y, int state) {
+            this.x = x;
+            this.y = y;
+            this.state=state;
+        }
     }
 }
