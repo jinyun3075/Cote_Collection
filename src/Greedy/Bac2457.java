@@ -1,52 +1,56 @@
-package Greedy;
-
-import java.awt.*;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.PriorityQueue;
+package greedy;
+import java.io.*;
 import java.util.StringTokenizer;
 
 public class Bac2457 {
-    public static void main(String[] args) throws IOException {
-        BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
-        PriorityQueue<Point> arr = new PriorityQueue<Point>((Point a,Point b)-> a.x==b.x?a.y-b.y:a.x-b.x);
-        int N = Integer.parseInt(bf.readLine());
+    public static class Flower{
+        int st_month;
+        int st_day;
+        int end_month;
+        int end_day;
+        Flower(int st_month, int st_day, int end_month, int end_day){
+            this.st_month = st_month;
+            this.st_day = st_day;
+            this.end_month = end_month;
+            this.end_day = end_day;
+        }
+    }
+    
+    public void solution() throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int flower_cnt = Integer.parseInt(br.readLine());
         StringTokenizer st;
-        for(int i=0;i<N;i++){
-            st = new StringTokenizer(bf.readLine()) ;
-            int month1 = Integer.parseInt(st.nextToken());
-            int day1 = Integer.parseInt(st.nextToken());
-
-            int month2 = Integer.parseInt(st.nextToken());
-            int day2 = Integer.parseInt(st.nextToken());
-
-            arr.add(new Point(month1*100+day1,month2*100+day2));
+        Flower[] f_list = new Flower[flower_cnt];
+        for(int i = 0 ; i < flower_cnt ;i++){
+            st = new StringTokenizer(br.readLine());
+            f_list[i] = new Flower(Integer.parseInt(st.nextToken())
+            , Integer.parseInt(st.nextToken()), Integer.parseInt(st.nextToken()), Integer.parseInt(st.nextToken()));
         }
-        int val=0;
-        int step1=0;
-        while(!arr.isEmpty()&&arr.peek().x<=301){
-            step1=Math.max(arr.poll().y,step1);
-        }
-        if(step1==0) {
-            System.out.println(val);
-        }else{
-            val++;
-            while(!arr.isEmpty()&&step1<=1200){
-                int step2=0;
-                while(!arr.isEmpty()&&arr.peek().x<=step1){
-                    step2=Math.max(arr.poll().y,step2);
-                }
-                if(arr.isEmpty()&&step2<=1200||step2==0){
-                    val=0;
-                    break;
-                }else{
-                    step1=step2;
-                    val++;
+
+        int start_month = 3;
+        int start_day = 1;
+        int next_month = 3;
+        int next_day = 1;
+        int result = 0;
+        while(start_month < 12){
+            for(Flower f : f_list){
+                if(f.st_month < start_month || (f.st_month == start_month && f.st_day <= start_day)){
+                    if(f.end_month > next_month || (f.end_month == next_month && f.end_day > next_day)){
+                        next_month = f.end_month;
+                        next_day = f.end_day;
+                    }
                 }
             }
-            System.out.println(val);
+            if(start_month == next_month && start_day == next_day){
+                result = 0;
+                break;
+            }
+            start_month = next_month;
+            start_day = next_day;
+            result++;
         }
+        System.out.println(result);
 
     }
 }
+
